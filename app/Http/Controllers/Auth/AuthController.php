@@ -18,7 +18,7 @@ class AuthController extends Controller
             $user = DB::connection('snet')->selectOne("SELECT * FROM users WHERE email = ?", [$request->input('email')]);
 
             if (password_verify($request->input('password'), $user->password)) {
-                Auth::loginUsingId(1);
+                Auth::loginUsingId($user->id);
                 return redirect()->route('home');
             } else {
                 redirect()->route('login')->with('failure', 'Incorrect password');
@@ -29,6 +29,6 @@ class AuthController extends Controller
 
     public function logout(Request $request) {
         Auth::logout();
-        return redirect()->route('home');
+        return redirect()->route('main');
     }
 }

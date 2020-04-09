@@ -58,6 +58,10 @@
                                 <input type="email" class="form-control" name="email" id="email">
                             </div> <!-- form-group end.// -->
                             <div class="form-group">
+                                <label for="age">Age</label>
+                                <input type="text" class="form-control" name="age" id="age">
+                            </div>
+                            <div class="form-group">
                                 <label class="form-check form-check-inline">
                                     <input class="form-check-input" type="radio" name="gender" value="male">
                                     <span class="form-check-label"> Male </span>
