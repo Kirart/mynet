@@ -5,7 +5,7 @@
 @endSection
 
 @section('content')
-    <h1>{{ 'Profile' }}</h1>
+    <h1>Profile</h1>
     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
         <div class="row">
             <div class="col-md-6">

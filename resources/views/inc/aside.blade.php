@@ -1,6 +1,9 @@
 @section('aside')
     <div class="aside">
         <h4>Menu</h4>
-        <p>Just panel</p>
+        @guest
+        @else
+            <a href="{{ route('profiles_list') }}">Profiles list</a>
+        @endguest
         @show
     </div>
