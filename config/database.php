@@ -37,16 +37,16 @@ return [
 
         'snet' => [
             'read' => [
-                'host' => ['us-cdbr-iron-east-01.cleardb.net'],
+                'host' => [env('DATABASE_HOST')],
             ],
             'write' => [
-                'host' => ['us-cdbr-iron-east-01.cleardb.net'],
+                'host' => [env('DATABASE_HOST')],
             ],
             'sticky'    => false,
             'driver'    => 'mysql',
-            'database'  => 'snet',
-            'username'  => 'root',
-            'password'  => 'root',
+            'database'  => env('DB_DATABASE'),
+            'username'  => env('DATABASE_USERNAME'),
+            'password'  => env('DATABASE_PASSWORD'),
             'charset'   => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
             'prefix'    => '',
