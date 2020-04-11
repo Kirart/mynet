@@ -23,7 +23,7 @@
                         <td>{{ $profile->name }}</td>
                         <td>{{ $profile->surname }}</td>
                         <td>
-                            <button class="btn btn-success" style="margin-top:10px" @click.prevent="acceptRequest({{ $profile->id }})">Make friends</button></td>
+                            <button class="btn btn-success" style="margin-top:10px" @click.prevent="postRequest({{ $profile->id }})">Accept</button></td>
                     </tr>
                     </form>
                 @endforeach
@@ -45,8 +45,8 @@
                 user: {!! \Illuminate\Support\Facades\Auth::check() ? \Illuminate\Support\Facades\Auth::user()->toJson() : 'null' !!}
             },
             methods: {
-                acceptRequest(id) {
-                    axios.post('/requests_list', {receiver_id: id})
+                postRequest(id) {
+                    axios.post('/accept_request', {requester_id: id})
                         .then((response) => {
                             console.log('post request');
                         })

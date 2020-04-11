@@ -21,6 +21,14 @@ Route::match(['get', 'post'], '/home', 'HomeController@index')->name('home');
 
 Route::match(['get', 'post'], '/profiles_list', 'ProfilesListController@index')->name('profiles_list');
 
+Route::get('/make_friends', 'MakeFriendsController@index')->name('make_friends');
+
+Route::get('/requests_list', 'RequestsListController@index')->name('requests_list');
+Route::post('/requests_list', 'RequestsListController@newFriend')->name('requests_list');
+
+Route::post('/accept_request', 'AcceptRequestController@acceptRequest')->name('accept_request');
+
+Route::get('/friends_list', 'FriendListController@index')->name('friend_list');
 
 Route::match(['get', 'post'], '/login', 'Auth\AuthController@login')->name('login');
 Route::match(['get', 'post'], '/register', 'Auth\RegisterController@register')->name('register');
