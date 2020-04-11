@@ -37,16 +37,16 @@ return [
 
         'snet' => [
             'read' => [
-                'host' => [env('DATABASE_HOST')],
+                'host' => [env('DB_HOST')],
             ],
             'write' => [
-                'host' => [env('DATABASE_HOST')],
+                'host' => [env('DB_HOST')],
             ],
             'sticky'    => false,
             'driver'    => 'mysql',
             'database'  => env('DB_DATABASE'),
-            'username'  => env('DATABASE_USERNAME'),
-            'password'  => env('DATABASE_PASSWORD'),
+            'username'  => env('DB_USERNAME'),
+            'password'  => env('DB_PASSWORD'),
             'charset'   => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
             'prefix'    => '',
