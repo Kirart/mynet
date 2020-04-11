@@ -37,10 +37,10 @@ return [
 
         'snet' => [
             'read' => [
-                'host' => ['127.0.0.1'],
+                'host' => ['us-cdbr-iron-east-01.cleardb.net'],
             ],
             'write' => [
-                'host' => ['127.0.0.1'],
+                'host' => ['us-cdbr-iron-east-01.cleardb.net'],
             ],
             'sticky'    => false,
             'driver'    => 'mysql',
