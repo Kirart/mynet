@@ -11,7 +11,6 @@
             <thead>
             <tr>
                 <th scope="col">Name</th>
-                <th scope="col">Surname</th>
                 <th scope="col"></th>
             </tr>
             </thead>
@@ -21,8 +20,7 @@
                           onsubmit="event.preventDefault(); return sendRequest(this);">
                         @csrf
                         <tr>
-                            <td>{{ $profile->name }}</td>
-                            <td>{{ $profile->surname }}</td>
+                            <td><a href="{{ route('profile', $profile->id) }}">{{ $profile->name }} {{ $profile->surname }}</a></td>
                             <td>
                                 @if($profile->status != 1)
                                     <button id="button{{ $profile->id }}" type="submit" class="btn btn-primary" {{ $profile->status == 0 ? 'disabled' : '' }}>Make friends</button>
