@@ -21,9 +21,10 @@ class AuthController extends Controller
                 Auth::loginUsingId($user->id);
                 return redirect()->route('profile', Auth::id());
             } else {
-                redirect()->route('login')->with('failure', 'Incorrect password');
+                redirect()->route('login');
             }
         }
+        return view('auth.login')->withErrors(['Incorrect password']);
     }
 
 

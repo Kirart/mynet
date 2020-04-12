@@ -28,6 +28,10 @@ class ProfileController extends Controller
     {
         $user = DB::connection('snet')->selectOne("SELECT * FROM users WHERE id = ?", [$id]);
 
+        if (!$user) {
+            return redirect()->route('main', ['msg' => 'No such profile']);
+        }
+
         return view('profile', [
             'name'      => $user->name,
             'surname'   => $user->surname,

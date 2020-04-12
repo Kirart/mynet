@@ -13,9 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('main');
-})->name('main');
+Route::get('/', 'MainController@index')->name('main');
 
 Route::get('/profile/{id}', 'ProfileController@index')->name('profile');
 

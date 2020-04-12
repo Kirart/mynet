@@ -5,7 +5,5 @@
 @endSection
 
 @section('content')
-    @guest
-        <h1>Please login to view the content</h1>
-    @endguest
+    <h1>{{ $message }}</h1>
 @endSection
