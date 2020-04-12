@@ -23,7 +23,11 @@
                         <tr>
                             <td>{{ $profile->name }}</td>
                             <td>{{ $profile->surname }}</td>
-                            <td><button id="button" type="submit" class="btn btn-primary">Make friends</button></td>
+                            <td>
+                                @if($profile->status != 1)
+                                    <button id="button{{ $profile->id }}" type="submit" class="btn btn-primary" {{ $profile->status == 0 ? 'disabled' : '' }}>Make friends</button>
+                                @endif
+                            </td>
                         </tr>
                     </form>
                 @endforeach
@@ -32,12 +36,6 @@
     </div>
 @endSection
 
-@section('aside')
-    @parent
-    <p>Дополнительный текст</p>
-@endsection
-
-
 @section('scripts')
     <script type="application/javascript">
         function sendRequest(form) {
@@ -45,20 +43,15 @@
                 var id = $(form).data('id');
                 $.ajax({
                     url: '{{ route('requests_list') }}',
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
                     type: "POST",
                     data: {'receiver_id': id},
                     success: function (response) {
                         if (response.success) {
-                            console.log('success');
-                            // $('#row_' + id).remove();
-                            // $('#modal_'+id).modal('hide');
-                            // $('body').removeClass('modal-open');
-                            // $('.modal-backdrop').remove();
+                            $('#button' + id).prop('disabled', true);
                         } else {
-                            // $('#row_' + id).addClass('danger');
-                            // $('#allseo_val_' + id).val(response.allseo);
-                            // $('#modal-body_' + id).css("background-color", "#FF8597");
-                            console.log('error');
                             console.log(response.error);
                         }
                     }

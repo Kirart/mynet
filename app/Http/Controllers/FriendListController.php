@@ -24,23 +24,15 @@ class FriendListController extends Controller
      */
     public function index()
     {
-        $friends_outcoming = DB::connection('snet')->select("
+        $friends = DB::connection('snet')->select("
             SELECT
-                u.id, u.name, u.surname FROM friend_relations f JOIN users u ON u.id = f.receiver_id
+                u.id, u.name, u.surname
+            FROM friend_list f JOIN users u ON u.id = f.user_id_2
             WHERE
-                requester_id = ?
-                AND status = 1", [Auth::id()]);
-
-        $friends_incoming = DB::connection('snet')->select("
-            SELECT
-                u.id, u.name, u.surname FROM friend_relations f JOIN users u ON u.id = f.receiver_id
-            WHERE
-                receiver_id = ?
-                AND status = 1", [Auth::id()]);
-
+                user_id_1 = ?", [Auth::id()]);
 
         return view('friends_list', [
-            'profiles' => array_merge($friends_outcoming, $friends_incoming),
+            'profiles' => $friends,
         ]);
     }
 }

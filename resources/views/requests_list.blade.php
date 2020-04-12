@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    Profiles list
+    Requests list
 @endSection
 
 @section('content')
@@ -22,7 +22,7 @@
                         <tr>
                             <td>{{ $profile->name }}</td>
                             <td>{{ $profile->surname }}</td>
-                            <td><button id="button" type="submit" class="btn btn-primary">Accept request</button></td>
+                            <td><button id="button{{ $profile->id }}" type="submit" class="btn btn-primary">Accept request</button></td>
                         </tr>
                     </form>
                 @endforeach
@@ -31,34 +31,26 @@
     </div>
 @endSection
 
-@section('aside')
-    @parent
-    <p>Дополнительный текст</p>
-@endsection
-
 @section('scripts')
     <script type="application/javascript">
         function acceptRequest(form) {
             if (confirm("Accept friendship request?")) {
-                {{--var id = $(form).data('id');--}}
-                {{--$.ajax({--}}
-                {{--    url: '{{ route('submit_allseo') }}',--}}
-                {{--    type: "POST",--}}
-                {{--    data: $(form).serialize(),--}}
-                {{--    success: function (response) {--}}
-                {{--        if (response.success) {--}}
-                {{--            $('#row_' + id).remove();--}}
-                {{--            $('#modal_'+id).modal('hide');--}}
-                {{--            $('body').removeClass('modal-open');--}}
-                {{--            $('.modal-backdrop').remove();--}}
-                {{--        } else {--}}
-                {{--            $('#row_' + id).addClass('danger');--}}
-                {{--            $('#allseo_val_' + id).val(response.allseo);--}}
-                {{--            $('#modal-body_' + id).css("background-color", "#FF8597");--}}
-                {{--            console.log(response.error);--}}
-                {{--        }--}}
-                {{--    }--}}
-                {{--});--}}
+                var id = $(form).data('id');
+                $.ajax({
+                    url: '{{ route('accept_request') }}',
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    type: "POST",
+                    data: {'requester_id': id},
+                    success: function (response) {
+                        if (response.success) {
+                            $('#button' + id).prop('disabled', true);
+                        } else {
+                            console.log(response.error);
+                        }
+                    }
+                });
             }
         }
     </script>

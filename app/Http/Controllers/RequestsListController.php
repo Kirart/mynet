@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\NewFriend;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -28,7 +28,8 @@ class RequestsListController extends Controller
     {
         $requesters = DB::connection('snet')->select("
             SELECT
-                u.id, u.name, u.surname FROM friend_relations f JOIN users u ON u.id = f.requester_id
+                u.id, u.name, u.surname
+            FROM friend_requests f JOIN users u ON u.id = f.requester_id
             WHERE
                 receiver_id = ?
                 AND status = 0", [Auth::id()]);
@@ -39,13 +40,12 @@ class RequestsListController extends Controller
         ]);
     }
 
-    public function newFriend(Request $request)
+    public function newFriend(Request $request, Response $response)
     {
-        $res = $request->all();
-        DB::connection('snet')->insert('insert into friend_relations (requester_id, receiver_id, status) values (?, ?, 0)', [
+        DB::connection('snet')->insert('INSERT INTO friend_requests (requester_id, receiver_id, status) VALUE (?, ?, 0)', [
             Auth::id(),
             $request->input('receiver_id'),
         ]);
-        return response()->json('success');
+        return ['success' => true];
     }
 }

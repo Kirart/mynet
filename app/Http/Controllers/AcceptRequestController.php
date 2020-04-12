@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\NewFriend;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -21,10 +20,11 @@ class AcceptRequestController extends Controller
 
     public function acceptRequest(Request $request)
     {
-        DB::connection('snet')->update('UPDATE friend_relations SET status = 1 WHERE receiver_id = ? AND requester_id = ?', [
-            Auth::id(),
-            $request->input('requester_id'),
-        ]);
-        return response()->json('success');
+        $cur_user_id = Auth::id();
+        $req_id = $request->input('requester_id');
+        DB::connection('snet')->insert('INSERT INTO friend_list(user_id_1, user_id_2) VALUE(?, ?)', [$req_id, $cur_user_id]);
+        DB::connection('snet')->insert('INSERT INTO friend_list(user_id_1, user_id_2) VALUE(?, ?)', [$cur_user_id, $req_id]);
+        DB::connection('snet')->update('UPDATE friend_requests SET status = 1 WHERE requester_id = ? AND receiver_id = ?', [$req_id, $cur_user_id]);
+        return ['success' => true];
     }
 }

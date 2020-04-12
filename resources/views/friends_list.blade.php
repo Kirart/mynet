@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    Profiles list
+    Friends list
 @endSection
 
 @section('content')
@@ -29,8 +29,3 @@
         </table>
     </div>
 @endSection
-
-@section('aside')
-    @parent
-    <p>Дополнительный текст</p>
-@endsection
