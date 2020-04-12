@@ -11,7 +11,6 @@
             <thead>
             <tr>
                 <th scope="col">Name</th>
-                <th scope="col">Surname</th>
                 <th scope="col"></th>
             </tr>
             </thead>
@@ -20,8 +19,7 @@
                     <form>
                         @csrf
                     <tr>
-                        <td>{{ $profile->name }}</td>
-                        <td>{{ $profile->surname }}</td>
+                        <td><a href="{{ route('profile', $profile->id) }}">{{ $profile->name }} {{ $profile->surname }}</a></td>
                     </tr>
                     </form>
                 @endforeach

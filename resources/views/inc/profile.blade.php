@@ -66,8 +66,3 @@
     </div>
 
 @endSection
-
-@section('aside')
-    @parent
-    <p>Дополнительный текст</p>
-@endsection

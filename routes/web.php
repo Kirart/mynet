@@ -17,7 +17,7 @@ Route::get('/', function () {
     return view('main');
 })->name('main');
 
-Route::match(['get', 'post'], '/home', 'HomeController@index')->name('home');
+Route::get('/profile/{id}', 'ProfileController@index')->name('profile');
 
 Route::match(['get', 'post'], '/profiles_list', 'ProfilesListController@index')->name('profiles_list');
 

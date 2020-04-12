@@ -19,7 +19,7 @@ class AuthController extends Controller
 
             if (password_verify($request->input('password'), $user->password)) {
                 Auth::loginUsingId($user->id);
-                return redirect()->route('home');
+                return redirect()->route('profile', Auth::id());
             } else {
                 redirect()->route('login')->with('failure', 'Incorrect password');
             }

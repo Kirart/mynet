@@ -16,7 +16,7 @@
                             <input type="email" class="form-control" name="email" id="email">
                         </div> <!-- form-group end.// -->
                         <div class="form-group">
-                            <label for="password">Create password</label>
+                            <label for="password">Password</label>
                             <input type="password" name="password" id="password" class="form-control">
                         </div> <!-- form-group end.// -->
                         <div class="form-group">
@@ -27,20 +27,5 @@
             </div> <!-- card.// -->
         </div> <!-- col.//-->
     </div>
-{{--    <div class="row content-center">--}}
-{{--        <form action="{{ route('login') }}" method="post">--}}
-{{--            @csrf--}}
-
-{{--            <div class="form-group">--}}
-{{--                <label for="email">Введите email</label>--}}
-{{--                <input type="text" name="email" placeholder="Введите email" id="email" class="form-control">--}}
-{{--            </div>--}}
-{{--            <div class="form-group">--}}
-{{--                <label for="password">Пароль</label>--}}
-{{--                <input type="text" name="password" placeholder="Пароль" id="password" class="form-control">--}}
-{{--            </div>--}}
-{{--            <button type="submit" class="btn btn-success">Sign in</button>--}}
-{{--        </form>--}}
-{{--    </div>--}}
 </div>
 @endsection

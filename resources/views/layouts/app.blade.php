@@ -22,17 +22,22 @@
     <div id="app">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="{{ route('home') }}">MyNet <span class="sr-only">(current)</span></a>
-                    </li>
-                </ul>
                 @guest
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a class="nav-link" href="{{ route('login') }}">Login</a></li>
-                    <li><a class="nav-link" href="{{ route('register') }}">Register</a></li>
-                </ul>
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{{ route('login') }}">MyNet <span class="sr-only">(current)</span></a>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a class="nav-link" href="{{ route('login') }}">Login</a></li>
+                        <li><a class="nav-link" href="{{ route('register') }}">Register</a></li>
+                    </ul>
                 @else
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{{ route('profile', \Illuminate\Support\Facades\Auth::id()) }}">MyNet <span class="sr-only">(current)</span></a>
+                        </li>
+                    </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li><a class="nav-link" href="{{ route('logout') }}">Logout</a></li>
                     </ul>
@@ -46,9 +51,12 @@
                 <div class="col-8">
                     @yield('content')
                 </div>
+                @guest
+                @else
                 <div class="col-4">
                     @include('inc.aside')
                 </div>
+                @endguest
             </div>
         </div>
     </div>
