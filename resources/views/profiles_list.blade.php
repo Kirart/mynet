@@ -17,29 +17,53 @@
             </thead>
             <tbody>
                 @foreach($profiles as $profile)
-                    <tr>
-                        <td>{{ $profile->name }}</td>
-                        <td>{{ $profile->surname }}</td>
-                        <td><div class="btn btn-success btn-sm" id="{{ $profile->id }}"
-                                 onclick="event.preventDefault(); return makeFriends(id);">
-                                Make friends
-                            </div></td>
-                    </tr>
+                    <form method="post" data-id="{{ $profile->id }}"
+                          onsubmit="event.preventDefault(); return sendRequest(this);">
+                        @csrf
+                        <tr>
+                            <td>{{ $profile->name }}</td>
+                            <td>{{ $profile->surname }}</td>
+                            <td><button id="button" type="submit" class="btn btn-primary">Make friends</button></td>
+                        </tr>
+                    </form>
                 @endforeach
             </tbody>
         </table>
     </div>
-    <script type="application/javascript">
-        function makeFriends(id) {
-            {{--document.getElementById("tr" + id).style.backgroundColor = "#BFFFAC";--}}
-            {{--var str = '{{ path_for('dash_allseo_editor', {'id':':id'}) }}';--}}
-            {{--var url = str.replace(":id", id);--}}
-            {{--window.open(url, '_blank');--}}
-        }
-    </script>
 @endSection
 
 @section('aside')
     @parent
     <p>Дополнительный текст</p>
+@endsection
+
+
+@section('scripts')
+    <script type="application/javascript">
+        function sendRequest(form) {
+            if (confirm("Send friendship request?")) {
+                var id = $(form).data('id');
+                $.ajax({
+                    url: '{{ route('requests_list') }}',
+                    type: "POST",
+                    data: {'receiver_id': id},
+                    success: function (response) {
+                        if (response.success) {
+                            console.log('success');
+                            // $('#row_' + id).remove();
+                            // $('#modal_'+id).modal('hide');
+                            // $('body').removeClass('modal-open');
+                            // $('.modal-backdrop').remove();
+                        } else {
+                            // $('#row_' + id).addClass('danger');
+                            // $('#allseo_val_' + id).val(response.allseo);
+                            // $('#modal-body_' + id).css("background-color", "#FF8597");
+                            console.log('error');
+                            console.log(response.error);
+                        }
+                    }
+                });
+            }
+        }
+    </script>
 @endsection
