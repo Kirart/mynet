@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    Profiles list
+    Requests list
 @endSection
 
 @section('content')
@@ -18,16 +18,11 @@
             <tbody>
                 @foreach($profiles as $profile)
                     <form method="post" data-id="{{ $profile->id }}"
-                          onsubmit="event.preventDefault(); return sendRequest(this);">
-                        @csrf
+                          onsubmit="event.preventDefault(); return acceptRequest(this);">
                         <tr>
                             <td>{{ $profile->name }}</td>
                             <td>{{ $profile->surname }}</td>
-                            <td>
-                                @if($profile->status != 1)
-                                    <button id="button{{ $profile->id }}" type="submit" class="btn btn-primary" {{ $profile->status == 0 ? 'disabled' : '' }}>Make friends</button>
-                                @endif
-                            </td>
+                            <td><button id="button{{ $profile->id }}" type="submit" class="btn btn-primary">Accept request</button></td>
                         </tr>
                     </form>
                 @endforeach
@@ -38,16 +33,16 @@
 
 @section('scripts')
     <script type="application/javascript">
-        function sendRequest(form) {
-            if (confirm("Send friendship request?")) {
+        function acceptRequest(form) {
+            if (confirm("Accept friendship request?")) {
                 var id = $(form).data('id');
                 $.ajax({
-                    url: '{{ route('requests_list') }}',
+                    url: '{{ route('accept_request') }}',
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
                     type: "POST",
-                    data: {'receiver_id': id},
+                    data: {'requester_id': id},
                     success: function (response) {
                         if (response.success) {
                             $('#button' + id).prop('disabled', true);
