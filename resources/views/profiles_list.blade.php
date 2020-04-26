@@ -7,6 +7,23 @@
 @section('content')
     <div>
         <h1>Profiles list</h1>
+        <div>
+            <form method="post" data-id=""
+                  onsubmit="event.preventDefault(); return search(this);">
+                @csrf
+                <div class="form-row">
+                    <div class="col form-group">
+                        <label for="name">First name</label>
+                        <input type="text" name="name" id="name" class="form-control">
+                    </div> <!-- form-group end.// -->
+                    <div class="col form-group">
+                        <label for="surname">Last name</label>
+                        <input type="text" name="surname" id="surname" class="form-control">
+                    </div> <!-- form-group end.// -->
+                    <button id="button-search" type="submit" class="btn btn-primary">Search</button>
+                </div> <!-- form-row end.// -->
+            </form>
+        </div>
         <table class="table">
             <thead>
             <tr>
@@ -55,6 +72,25 @@
                     }
                 });
             }
+        }
+        function search(form) {
+            var name = $("#name").val();
+            var surname = $("#surname").val();
+            $.ajax({
+                url: '{{ route('profiles_list') }}',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: "GET",
+                data: {'name': name, 'surname': surname},
+                success: function (response) {
+                    if (response.success) {
+                        console.log(response.success);
+                    } else {
+                        console.log(response.error);
+                    }
+                }
+            });
         }
     </script>
 @endsection

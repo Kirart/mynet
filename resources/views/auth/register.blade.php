@@ -2,38 +2,6 @@
 
 @section('content')
     <div class="container">
-{{--        <div class="row content-center">--}}
-{{--            <form action="{{ route('register') }}" method="post">--}}
-{{--                @csrf--}}
-
-{{--                <div class="form-group">--}}
-{{--                    <label for="name">Введите имя</label>--}}
-{{--                    <input type="text" name="name" placeholder="Введите имя" id="name" class="form-control">--}}
-{{--                </div>--}}
-{{--                <div class="form-group">--}}
-{{--                    <label for="surname">Введите фамилию</label>--}}
-{{--                    <input type="text" name="surname" placeholder="Введите фамилию" id="surname" class="form-control">--}}
-{{--                </div>--}}
-{{--                <div class="form-group">--}}
-{{--                    <label for="age">Возраст</label>--}}
-{{--                    <input type="text" name="age" placeholder="Введите возраст" id="age" class="form-control">--}}
-{{--                </div>--}}
-{{--                <div class="form-group">--}}
-{{--                    <label for="subject">Тема сообщения</label>--}}
-{{--                    <input type="text" name="subject" placeholder="Тема сообщения" id="subject" class="form-control">--}}
-{{--                </div>--}}
-{{--                <div class="form-group">--}}
-{{--                    <label for="interests">Интересы</label>--}}
-{{--                    <textarea name="interests" placeholder="Интересы" id="interests" class="form-control"></textarea>--}}
-{{--                </div>--}}
-{{--                <div class="form-group">--}}
-{{--                    <label for="city">Город</label>--}}
-{{--                    <input type="text" name="city" placeholder="Введите город" id="city" class="form-control">--}}
-{{--                </div>--}}
-{{--                <button type="submit" class="btn btn-success">Отправить</button>--}}
-{{--            </form>--}}
-{{--        </div>--}}
-
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="card">
