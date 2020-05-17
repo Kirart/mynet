@@ -14,7 +14,7 @@ class RegisterController extends Controller
         if ($request->method() == 'GET') {
             return view('auth.register');
         } else {
-            DB::connection('snet')->insert('insert into users (name, surname, age, email, male, city, password, interests) values (?, ?, ?, ?, ?, ?, ?, ?)', [
+            DB::connection('snet_master')->insert('insert into users (name, surname, age, email, male, city, password, interests) values (?, ?, ?, ?, ?, ?, ?, ?)', [
                 $request->input('name'),
                 $request->input('surname'),
                 (int)$request->input('age'),
