@@ -35,18 +35,37 @@ return [
 
     'connections' => [
 
-        'snet' => [
+        'snet_master' => [
             'read' => [
-                'host' => [env('DB_HOST')],
+                'host' => [env('DB_HOST_MASTER')],
             ],
             'write' => [
-                'host' => [env('DB_HOST')],
+                'host' => [env('DB_HOST_MASTER')],
             ],
             'sticky'    => false,
             'driver'    => 'mysql',
-            'database'  => env('DB_DATABASE'),
-            'username'  => env('DB_USERNAME'),
-            'password'  => env('DB_PASSWORD'),
+            'database'  => env('DB_DATABASE_MASTER'),
+            'username'  => env('DB_USERNAME_MASTER'),
+            'password'  => env('DB_PASSWORD_MASTER'),
+            'port' => env('DB_PORT_MASTER'),
+            'charset'   => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix'    => '',
+        ],
+
+        'snet_slave' => [
+            'read' => [
+                'host' => [env('DB_HOST_SLAVE')],
+            ],
+            'write' => [
+                'host' => [env('DB_HOST_SLAVE')],
+            ],
+            'sticky'    => false,
+            'driver'    => 'mysql',
+            'database'  => env('DB_DATABASE_SLAVE'),
+            'username'  => env('DB_USERNAME_SLAVE'),
+            'password'  => env('DB_PASSWORD_SLAVE'),
+            'port' => env('DB_PORT_SLAVE'),
             'charset'   => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
             'prefix'    => '',
