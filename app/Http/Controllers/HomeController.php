@@ -25,7 +25,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $user = DB::connection('snet_slave')->selectOne("SELECT * FROM users WHERE id = ?", [Auth::id()]);
+        $user = DB::connection('snet')->selectOne("SELECT * FROM users WHERE id = ?", [Auth::id()]);
 
         return view('home', [
             'name'      => $user->name,

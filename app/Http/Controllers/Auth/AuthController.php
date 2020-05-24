@@ -15,7 +15,7 @@ class AuthController extends Controller
         if ($request->method() == 'GET') {
             return view('auth.login');
         } else {
-            $user = DB::connection('snet_slave')->selectOne("SELECT * FROM users WHERE email = ?", [$request->input('email')]);
+            $user = DB::connection('snet')->selectOne("SELECT * FROM users WHERE email = ?", [$request->input('email')]);
 
             if (password_verify($request->input('password'), $user->password)) {
                 Auth::loginUsingId($user->id);

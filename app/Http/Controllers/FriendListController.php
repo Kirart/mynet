@@ -24,7 +24,7 @@ class FriendListController extends Controller
      */
     public function index()
     {
-        $friends = DB::connection('snet_slave')->select("
+        $friends = DB::connection('snet')->select("
             SELECT
                 u.id, u.name, u.surname
             FROM friend_list f JOIN users u ON u.id = f.user_id_2
