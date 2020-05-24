@@ -26,7 +26,7 @@ class RequestsListController extends Controller
      */
     public function index()
     {
-        $requesters = DB::connection('snet_slave')->select("
+        $requesters = DB::connection('snet')->select("
             SELECT
                 u.id, u.name, u.surname
             FROM friend_requests f JOIN users u ON u.id = f.requester_id
@@ -42,7 +42,7 @@ class RequestsListController extends Controller
 
     public function newFriend(Request $request, Response $response)
     {
-        DB::connection('snet_master')->insert('INSERT INTO friend_requests (requester_id, receiver_id, status) VALUE (?, ?, 0)', [
+        DB::connection('snet')->insert('INSERT INTO friend_requests (requester_id, receiver_id, status) VALUE (?, ?, 0)', [
             Auth::id(),
             $request->input('receiver_id'),
         ]);

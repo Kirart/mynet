@@ -26,7 +26,7 @@ class ProfileController extends Controller
      */
     public function index($id)
     {
-        $user = DB::connection('snet_slave')->selectOne("SELECT * FROM users WHERE id = ?", [$id]);
+        $user = DB::connection('snet')->selectOne("SELECT * FROM users WHERE id = ?", [$id]);
 
         if (!$user) {
             return redirect()->route('main', ['msg' => 'No such profile']);
